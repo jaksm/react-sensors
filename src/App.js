@@ -1,26 +1,59 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import styled from "styled-components";
+import { DeviceMotion } from "react-fns";
+
+//#region ui
+const AppContainer = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin-top: 3rem;
+`;
+
+const DemoContainer = styled.section`
+  border-radius: 0.5rem;
+  border: 2px solid white;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 300px;
+`;
+//#endregion
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <AppContainer>
+        <h1>Browser Sensors Demo</h1>
+        <DemoContainer>
+          <h3>Device Motion</h3>
+          <DeviceMotion
+            render={({
+              acceleration,
+              accelerationIncludingGravity,
+              rotationRate,
+              interval
+            }) => (
+              <pre>
+                {JSON.stringify(
+                  {
+                    acceleration,
+                    accelerationIncludingGravity,
+                    rotationRate,
+                    interval
+                  },
+                  null,
+                  2
+                )}
+              </pre>
+            )}
+          />
+        </DemoContainer>
+      </AppContainer>
     );
   }
 }
